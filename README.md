@@ -55,12 +55,12 @@ The client wants us to generate daily reports, highlighting out of all locations
 
 
 #### Graph view after Running the DAG:
-![](images/Graph_View.png)
+![](images/Graph_View.PNG)
 
 #### Tree view:
-![](images/Tree_View.png)
+![](images/Tree_View.PNG)
 
 
 #### DAG Details:
-![](images/DAG_Details.png)
+![](images/DAG_Details.PNG)
 
