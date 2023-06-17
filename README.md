@@ -8,7 +8,7 @@ Daily CSV fileare given containing transaction data of all stores.
 
 The client wants us to generate daily reports, highlighting out of all locations, which location has made the highest profit? The profit of each individual store?
 
-[Location wise profit - Individual store profit]
+[Location wise profit - Individual store wise profit]
 
 ![](images/store_raw_data.png)
 
