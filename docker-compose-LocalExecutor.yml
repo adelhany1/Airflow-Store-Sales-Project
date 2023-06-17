@@ -1,0 +1,51 @@
+version: '2.1'
+services:
+    postgres:
+        image: postgres:9.6
+        environment:
+            - POSTGRES_USER=airflow
+            - POSTGRES_PASSWORD=airflow
+            - POSTGRES_DB=airflow
+
+    mysql:
+        image: mysql:5.7.27
+        environment:
+            - MYSQL_ROOT_PASSWORD=root
+        volumes:
+            - ./store_files:/store_files_mysql/  # make this location accessible to MySQL, have to mount this directory on MySQL container
+            # directory to be mounted :/ the mounter path (will be created on the fly and will share files)
+            - ./mysql.cnf:/etc/mysql/mysql.cnf  # disaple the security in MySQL that prevent it from reading the file 
+            # Do it through mysql.cnf , allowing us to load data from external files into mysql tables
+            # We did mount this file too (mysql.cnf) to be accessible inside our MySQL container
+
+    webserver:
+        image: puckel/docker-airflow:1.10.4
+        restart: always
+        depends_on:
+            - postgres
+            - mysql
+        environment:
+            - INSTALL_MYSQL=y # import all relevant components of mysql we will use in dag file
+            - LOAD_EX=n
+            - EXECUTOR=Local
+              # Simple Mail Transfer Protocol, communication guidelines that allow software to transmit an email over internet, we need to set it up
+            - AIRFLOW__SMTP__SMTP_HOST=smtp.gmail.com  
+            - AIRFLOW__SMTP__SMTP_USER=example@gmail.com  # from which we will be sending E-mails
+            - AIRFLOW__SMTP__SMTP_PASSWORD=hdwiondmyyobhlto # 16-digit password, assosiated with this email and specific for this Airflow Application
+            # this is not the general gmail password, this pass gmail provides for SMTP connection [gmail specific password]
+            - AIRFLOW__SMTP__SMTP_PORT=587
+            - AIRFLOW__SMTP__SMTP_MAIL_FROM=Airflow
+        volumes:
+            - ./dags:/usr/local/airflow/dags
+            - ./store_files:/usr/local/airflow/store_files_airflow   # need to mount the directory with Airflow container (like mysql), 2 different containers
+            - ./sql_files:/usr/local/airflow/sql_files
+            # Uncomment to include custom plugins
+            # - ./plugins:/usr/local/airflow/plugins
+        ports:
+            - "8080:8080"
+        command: webserver
+        healthcheck:
+            test: ["CMD-SHELL", "[ -f /usr/local/airflow/airflow-webserver.pid ]"]
+            interval: 30s
+            timeout: 30s
+            retries: 3
