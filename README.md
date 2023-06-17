@@ -2,6 +2,13 @@
 ## What It Does
 
 Airflow pipeline for data reading, cleansing, aggregating, saving, and emailing the results! 
+Retail store cliwnt has number of store outlets located in different locations. From the transactions happening in various stores; the company wants to get 'Daily Profit Reports' on how its stores are performing in market.
+
+Daily CSV fileare given containing transaction data of all stores.
+
+The client wants us to generate daily reports, highlighting out of all locations, which location has made the highest profit? The profit of each individual store?
+
+[Location wise profit - Individual store profit]
 
 ![](images/store_raw_data.png)
 
@@ -13,15 +20,7 @@ Airflow pipeline for data reading, cleansing, aggregating, saving, and emailing 
 4. Insert the cleaned store transaction data to the created MySQL table 
 5. Calculate store-wise and location-wise profit for yesterday and save the results in CSV files 
 6. Rename the output files by adding target date 
-7. Send an email with the two output files attached 
-8. Rename the raw_store_transaction.csv file by adding yeserday date  
-
-
-
-## Requirements
-
-* Python 3.7+
-* Docker
+. Rename the raw_store_transaction.csv file by adding yeserday date  
 
 
 
@@ -53,5 +52,15 @@ Airflow pipeline for data reading, cleansing, aggregating, saving, and emailing 
 
 8. To check the tables in MySQL, grab the mysql container id from `docker ps` and run `docker exec -it {container_id} bash`. `mysql -u root -p`, `use mysql`, and `show tables;`
 9. Turn on the `store_dag` DAG and trigger the dag.
-10. Get an email with processed dataset attached! 
+
+
+#### Graph view after Running the DAG:
+![](images/Graph_View.png)
+
+#### Tree view:
+![](images/Tree_View.png)
+
+
+#### DAG Details:
+![](images/DAG_Details.png)
 
