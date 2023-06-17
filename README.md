@@ -5,7 +5,7 @@ Airflow pipeline for data reading, cleansing, aggregating, saving, and emailing 
 
 Retail store client has number of store outlets located in different locations. From the transactions happening in various stores; the company wants to get 'Daily Profit Reports' on how its stores are performing in market.
 
-Daily CSV fileare given containing transaction data of all stores.
+Daily CSV file are given containing transaction data of all stores.
 
 The client wants us to generate daily reports, highlighting out of all locations, which location has made the highest profit? The profit of each individual store?
 
