@@ -2,7 +2,8 @@
 ## What It Does
 
 Airflow pipeline for data reading, cleansing, aggregating, saving, and emailing the results! 
-Retail store cliwnt has number of store outlets located in different locations. From the transactions happening in various stores; the company wants to get 'Daily Profit Reports' on how its stores are performing in market.
+
+Retail store client has number of store outlets located in different locations. From the transactions happening in various stores; the company wants to get 'Daily Profit Reports' on how its stores are performing in market.
 
 Daily CSV fileare given containing transaction data of all stores.
 
